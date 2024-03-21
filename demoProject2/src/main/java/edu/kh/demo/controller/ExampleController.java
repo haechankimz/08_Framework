@@ -108,7 +108,7 @@ public class ExampleController {
 	
 	/* @pathVariable
 	 * - 주소 중 일부분을 변수 값 처림 이용
-	 * 	+ 해당 어노테이션으로 얻오온값은 request scope에 세잍
+	 * 	+ 해당 어노테이션으로 얻어온값은 request scope에 세팅
 	 * 
 	 */
 	
