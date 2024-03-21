@@ -18,7 +18,7 @@ public class ExampleController {
 	 *    @PostMapping("주소") : POST(삽입) 방식 요청 매핑
 	 *    @PutMapping("주소")  : PUT (수정) 방식 요청 매핑
 	 *    						(form, js, a태그 요청 불가)
-	 *    @DeleteMapping('주소") : DELETE(삭제) 방식 요청 불가
+	 *    @DeleteMapping('주소") : DELETE(삭제) 방식 요청 매핑
 	 *    						(form, js, a태그 요청 불가)
 	 */
 	
