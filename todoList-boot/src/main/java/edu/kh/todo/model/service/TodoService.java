@@ -2,6 +2,8 @@ package edu.kh.todo.model.service;
 
 import java.util.Map;
 
+import edu.kh.todo.model.dto.Todo;
+
 public interface TodoService {
 
 	
@@ -16,5 +18,46 @@ public interface TodoService {
 	 * @return result
 	 */
 	int addTodo(String todoTitle, String todoContent);
+
+	
+	/** 할 일 상세조회
+	 * @param todoNo
+	 * @return todo
+	 */
+	Todo todoDetail(int todoNo);
+
+	/** 할 일 삭제
+	 * @param todoNo : 삭제할 일 번호(PK)
+	 * @param ra : 리다이렉트시 1회성으로 데이터 전달하는 객체 
+	 * @return todo
+	 */
+	int todoDelete(int todoNo);
+
+	
+	/** 할 일 수정
+	 * @param todo
+	 * @return result
+	 */
+	int todoUpdate(Todo todo);
+
+	/** 완료 여부 수정
+	 * @param todo
+	 * @return result
+	 */
+	int changeComplete(Todo todo);
+
+	
+	/** 전체 할 일 개수 조회
+	 * @return totalCount
+	 */
+	int getTotalCount();
+
+	
+	/** 완료된 할 일 개수 조회
+	 * @return completeCount
+	 */
+	int getCompleteCount();
+
+	
 
 }
