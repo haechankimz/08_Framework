@@ -25,7 +25,7 @@ const deleteBtn = document.querySelector("#deleteBtn");
 const changeComplete = document.querySelector("#changeComplete");
 const updateView = document.querySelector("#updateView");
 
-//
+//수정레이어
 const updateLayer = document.querySelector("#updateLayer");
 const updateTitle = document.querySelector("#updateTitle");
 const updateContent = document.querySelector("#updateContent");
@@ -143,8 +143,8 @@ addBtn.addEventListener("click", () => {
   })
 });
 // -------------------------------------------------------------------------------------
-
 // 비동기(ajax)로 할 일 상세 조회하는 함수
+
 const selectTodo = (url) => {
 
   // 매개 변수 url == "/ajax/detail?todoNo=10" 형태의 문자열
