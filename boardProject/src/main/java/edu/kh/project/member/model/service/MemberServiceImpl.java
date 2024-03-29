@@ -61,7 +61,7 @@ public class MemberServiceImpl implements MemberService {
 	public int signup(Member inputMember, String[] memberAddress) {
 		
 		// 주소가 입력되지 않으면
-		// inputMember.getMemberAddress() -> ", ,"
+		// inputMember.getMemberAddress() -> ",,"
 		//memberAddress -> [, ,]
 		
 		// 주소가 입력된 경우!
@@ -94,13 +94,18 @@ public class MemberServiceImpl implements MemberService {
 	
 	
 	
+	// 이메일 중복검사
+	@Override
+	public int checkEmail(String memberEmail) {
+		return mapper.checkEmail(memberEmail);
+	}
 	
 	
-	
-	
-	
-	
-	
+	// 닉네임 중복 검사
+	@Override
+	public int checkNickname(String memberNickname) {
+		return mapper.checkNickname(memberNickname);
+	}
 	
 	
 	
