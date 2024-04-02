@@ -59,7 +59,10 @@
   </select>
   
   
-  
+  <select id="selectMember" resultType="_int">
+  	SELECT MEMBER_NO, MEMBER_EMAIL, MEMBER_NICKNAME, MEMBER_DEL_FL
+  	FROM "MEMBER"
+  </select>
   
   
   

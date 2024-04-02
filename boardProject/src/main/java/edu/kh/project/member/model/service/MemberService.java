@@ -1,5 +1,7 @@
 package edu.kh.project.member.model.service;
 
+import java.util.List;
+
 import org.springframework.stereotype.Service;
 
 import edu.kh.project.member.model.dto.Member;
@@ -31,6 +33,21 @@ public interface MemberService {
 	 * @return count
 	 */
 	int checkNickname(String memberNickname);
+
+	/** 빠른 로그인
+	 * @param memberEmail
+	 * @return
+	 */
+	Member quickLogin(String memberEmail);
+
+	
+	/** 목록 조회
+	 * @return memberList
+	 */
+	List<Member> selectMember();
+	
+
+	
 
 	
 }

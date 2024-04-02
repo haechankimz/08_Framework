@@ -1,5 +1,7 @@
 package edu.kh.project.email.controller;
 
+import java.util.Map;
+
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -11,7 +13,7 @@ import org.springframework.web.bind.annotation.SessionAttributes;
 import edu.kh.project.email.model.service.EmailService;
 import lombok.RequiredArgsConstructor;
 
-@SessionAttributes // model 값 session으로 변경
+@SessionAttributes({"authKey"}) // model 값 session으로 변경
 @Controller
 @RequestMapping("email")
 @RequiredArgsConstructor // final 필드에 자동으로 의존성 주입(DI)
@@ -29,7 +31,7 @@ public class EmailController {
 		if(authKey != null) { // 인증 번호가 반환되서 돌아옴
 							  // == 이메일 보내기 성공
 			
-			// 이메일로 전달한 인증번호를 Session 올려둠
+			// 이메일로 전달한 인증번호를 Session 올려둠.
 			model.addAttribute("authKey", authKey); // request -> session
 			
 			return 1;
@@ -39,6 +41,19 @@ public class EmailController {
 		return 0;
 	}
 	
+	/** 입력된 인증번호와 Session에 있는 인증번호 비교
+	 * @param map : 전달 받은 JSON -> Map 변경하여 저장
+	 * @return
+	 */
+	@ResponseBody
+	@PostMapping("checkAuthKey")
+	public int checkAuthKey(@RequestBody Map<String, Object> map) {
+		
+		// 입력 받은 이메일, 인증 번호가 DB에 있는지 조회
+		// 이메일 있고, 인증번호 일치 == 1
+		// 아니면 0
+		return service.checkAuthKey(map);
+	}
 	
 	
 	
