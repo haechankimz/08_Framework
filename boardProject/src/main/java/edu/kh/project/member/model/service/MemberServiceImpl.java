@@ -127,12 +127,10 @@ public class MemberServiceImpl implements MemberService {
 	}
 	
 
-	
+	// 회원 목록 조회
 	@Override
 	public List<Member> selectMember() {
-		
-		List<Member> memList = mapper.selectMember();
-		return memList;
+		return mapper.selectMember();
 	}
 	
 	

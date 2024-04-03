@@ -231,12 +231,14 @@ public class MemberController {
 		return "redirect:/";
 	}
 	
+	
 	@ResponseBody
 	@GetMapping("selectMember")
 	public List<Member> memberList(){
 		
-		List<Member> memList = service.selectMember();
-		return memList;
+		// (java)List -> (Spring)HttpMessageConverter가 JSON Array로 변경
+		// -> (js)JSON Array -> response.json() -> [{}, {}, {}] JS 객체 배열
+		return  service.selectMember();
 	}
 	
 	
