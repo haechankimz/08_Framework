@@ -167,5 +167,92 @@ selectMemberList.addEventListener("click", () => {
   });
 
 });
+//------------------------------------------------------------------------------
+/* 특정 회원 비밀번호 초기화 하기 */
+
+const resetMemberNo = document.querySelector("#resetMemberNo");
+const resetPw = document.querySelector("#resetPw");
+
+resetPw.addEventListener("click", () => {
+
+  //입력 받은 회원 번호 얻어오기
+  const inputNo = resetMemberNo.value;
+
+  if(inputNo.trim().length == 0){
+    alert("회원 번호를 입력해 주세요");
+    return;
+  }
+
+  fetch("/resetPw", {
+    method : "PUT", // PUT : 수정 요청 방식
+    headers : {"Content-Type" : "application/json"},
+    body : inputNo
+  })
+  .then(response => response.text())
+  .then(result => {
+    // result == 컨트롤러로 부터 반환받아 TEXT로 파싱한 값
+
+    if(result > 0) alert("초기화 성공!");
+    else           alert("해당 회원이 존재하지 않습니다");
+  })
+
+});
+
+/* 회원 번호로 탈퇴 복구 */
+const rollMemberNo = document.querySelector("#rollMemberNo");
+const rollBtn = document.querySelector("#rollBtn");
+
+rollBtn.addEventListener("click", () => {
+
+  const inputNo = rollMemberNo.value;
+
+  if(inputNo.trim().length == 0){
+    alert("회원 번호를 입력해 주세요");
+    return;
+  }
+
+  fetch("/rollMember", {
+    method : "PUT",
+    headers : {"Content-Type" : "application/json"},
+    body : inputNo
+  })
+  .then(response => response.text())
+  .then(result => {
+
+    if(result > 0){
+      alert("복구 성공!");
+    }else{
+      alert("복구 실패");
+    }
+  })
+
+});
+
+/* 회원 번호로 삭제 */
+const deleteMemberNo = document.querySelector("#deleteMemberNo");
+const deleteBtn = document.querySelector("#deleteBtn");
+
+deleteBtn.addEventListener("click", () => {
+
+  const inputNo = deleteMemberNo.value;
+
+  if(inputNo.trim().length == 0){
+    alert("회원 번호를 입력해 주세요");
+    return;
+  }
+
+  fetch("/deleteMember", {
+    method : "DELETE",
+    headers : {"Content-Type" : "application/json"},
+    body : inputNo
+  })
+  .then(resp => resp.text())
+  .then(result => {
+    
+    if(result > 0) alert("삭제 성공!")
+    else           alert("삭제 실패")
+  })
+
+});
 
 
