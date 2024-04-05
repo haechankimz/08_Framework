@@ -18,32 +18,46 @@ import jakarta.servlet.MultipartConfigElement;
 
 @Configuration
 @PropertySource("classpath:/config.properties")
-public class FileConfig implements WebMvcConfigurer{
-
-	// config.properties에 작성된 파일 인계 값
+public class FileConfig implements WebMvcConfigurer {
+	
+	
+	// config.properties에 작성된 파일 업로드 임계값 얻어와 필드에 대입
 	@Value("${spring.servlet.multipart.file-size-threshold}")
 	private long fileSizeThreshold;
 	
 	@Value("${spring.servlet.multipart.max-request-size}")
-	private long maxRequestSize; // 요청 당 파일 최대 크기
+	private long maxRequestSize; // 요청당 파일 최대 크기
 	
 	@Value("${spring.servlet.multipart.max-file-size}")
 	private long maxFileSize; // 개별 파일당 최대 크기
 	
 	@Value("${spring.servlet.multipart.location}")
-	private String location; // 개별 파일당 최대 크기
+	private String location; // 임계값 초과 시 임시 저장 폴더 경로
 	
-
+	
+	@Value("${my.profile.resource-handler}")
+	private String profileResourceHandler; // 프로필 이미지 요청 주소 
+	
+	@Value("${my.profile.resource-location}")
+	private String profileResourceLocation; // 프로필 이미지 요청 시 연결할 서버 폴더 경로
+	
+	
 	// 요청 주소에 따라
-	// 서버 컴퓨터의 어떤 경로에 접근할 지 설정
+	// 서버 컴퓨터의 어떤 경로에 접근할지 설정
 	@Override
 	public void addResourceHandlers(ResourceHandlerRegistry registry) {
 		
 		registry
 		.addResourceHandler("/myPage/file/**") // 클라이언트 요청 주소 패턴
 		.addResourceLocations("file:///C:\\uploadFiles\\test\\");
+		
+		
+		// 프로필 이미지 요청 - 서버 폴더 연결 추가
+		registry
+		.addResourceHandler(profileResourceHandler) // /myPage/profile
+		.addResourceLocations(profileResourceLocation);
 	}
-
+	
 	
 	
 	/* MultipartResolver 설정 */
@@ -66,12 +80,12 @@ public class FileConfig implements WebMvcConfigurer{
 	}
 	
 	
-	
-	// MultipartResolver 객체를 Bean으로 추가
+	// MultipartResolver 객체를 bean으로 추가
 	// -> 추가 후 위에서 만든 MultipartConfig를 자동으로 이용
 	@Bean
 	public MultipartResolver multipartResolver() {
-		StandardServletMultipartResolver multipartResolver = new StandardServletMultipartResolver();
+		StandardServletMultipartResolver multipartResolver
+			= new StandardServletMultipartResolver();
 		
 		return multipartResolver;
 	}
@@ -79,17 +93,7 @@ public class FileConfig implements WebMvcConfigurer{
 	
 	
 	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
+
 }
+
+
