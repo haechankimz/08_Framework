@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.khc.book.bm.model.mapper.BookMapper">
+
+	<insert id="bookInsert">
+		INSERT INTO "BOOK" 
+		VALUES(SEQ_BOOK_NO.NEXTVAL,
+			#{bookTitle},
+			#{writer},
+			#{price}, DEFAULT)
+	</insert>
+	
+	<select id="selectBook" resultType="Book">
+		SELECT * FROM "BOOK"
+		ORDER BY BOOK_NO
+	</select>
+	
+	<select id="searchBook" resultType="Book">
+		SELECT * FROM "BOOK"
+		WHERE BOOK_TITLE = #{searchTitle}
+	</select>
+ 
+</mapper>
