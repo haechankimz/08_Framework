@@ -7,12 +7,13 @@ selectBtn.addEventListener("click", () => {
   fetch("/book/selectBook")
   .then(response => response.json())
   .then(list => {
+    console.log(list);
 
     bookList.innerHTML="";
 
     for(let book of list){
       const tr = document.createElement("tr");
-      const arr = ['bookNo', 'bookTitle', 'writer', 'price', 'regDate'];
+      const arr = ['bookNo', 'bookTitle', 'bookWriter', 'price', 'regDate'];
 
       for(let key of arr){
         const td = document.createElement("td");

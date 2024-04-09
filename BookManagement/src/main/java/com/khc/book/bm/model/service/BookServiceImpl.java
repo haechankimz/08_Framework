@@ -30,7 +30,6 @@ public class BookServiceImpl implements BookService{
 	
 	@Override
 	public String searchBook(String searchTitle) {
-
 		return mapper.searchBook(searchTitle);
 	}
 

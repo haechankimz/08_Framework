@@ -13,7 +13,7 @@ public class Book {
 
 	private int bookNo;
 	private String bookTitle;
-	private String writer;
+	private String bookWriter;
 	private int price;
 	private String regDate;
 
