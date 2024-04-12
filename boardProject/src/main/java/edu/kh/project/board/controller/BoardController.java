@@ -1,5 +1,6 @@
 package edu.kh.project.board.controller;
 
+import java.util.HashMap;
 import java.util.Map;
 
 import org.springframework.stereotype.Controller;
@@ -8,7 +9,10 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
+import edu.kh.project.board.model.dto.Board;
+import edu.kh.project.board.model.dto.BoardImg;
 import edu.kh.project.board.model.service.BoardService;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
@@ -57,8 +61,61 @@ public class BoardController {
 		return "board/boardList"; // boardList.html로 forward
 	}
 	
+	// 상세 조회 요청 주소 
+	// /board/1/1999?cp=1
+	// /board/2/1343?cp=2
 	
-	
+	@GetMapping("{boardCode:[0-9]+}/{boardNo:[0-9]+}")
+	public String boardDetail(
+		@PathVariable("boardCode") int boardCode,
+		@PathVariable("boardNo") int boardNo,
+		Model model,
+		RedirectAttributes ra
+		) {
+		
+		// 게시글 상세 조회 서비스 호출
+		
+		// 1. Map으로 전달할 파라미터 묶기
+		Map<String, Integer> map = new HashMap<>();
+		map.put("boardCode", boardCode);
+		map.put("boardNo", boardNo);
+		
+		// 2. 서비스 호출
+		Board board = service.selectOne(map);
+		
+		String path = null;
+		
+		// 조회 결과가 없는 경우
+		if(board == null) {
+			path = "redirect:/board/" + boardCode; // 목록 재요청
+			ra.addFlashAttribute("message", "게시글이 존재 하지 않습니다");
+		}else { // 조회 결과가 있을 경우
+			path = "/board/boardDetail";
+			
+			// board - 게시글 상세조회 + imageList + commentList
+			model.addAttribute("board", board);
+			
+			// 조회된 이미지 목록(imageList)이 있을 경우
+			if(!board.getImageList().isEmpty()) {
+				
+				BoardImg thumbnail = null;
+				
+				// imageList의 0번 인덱스 == 가장 빠른 순서(imgOrder)
+				
+				// 이미지 목록의 첫 번째 행이 순서 0 == 썸네일 인 경우
+				if(board.getImageList().get(0).getImgOrder() == 0) {
+					thumbnail = board.getImageList().get(0);
+				}
+				
+				// 썸네일이 있을 때 / 없을 때
+				// 출력되는 이미지 / 시작 인덱스 지정하는 코드
+				// (썸네일 제외하고 인덱스 계산)
+				model.addAttribute("thumbnail", thumbnail);
+				model.addAttribute("start", thumbnail != null ? 1 : 0);
+			}
+		}
+		return path;
+	}
 	
 	
 	
@@ -77,31 +134,30 @@ public class BoardController {
 
 
 
-
-
-// @PathVariable("key")
-// @Request/Get/Post/Put/Delete Mapping에 작성된 URL에서 특정 경로를 얻어와
-// 저장하는 어노테이션
-
-// ex) 요청 주소 : /test/영주/하와이
-
-// @GetMapping("test/{apple}/{banana}")
-// public String test(
-//   @PathVariable("apple") String a,
-//   @PathVariable("banana") String b
-//  )
-
-// a에 저장된 값 == 영주
-// b에 저장된 값 == 하와이
-
-// [추가 내용]
-// 요청 주소에 정규 표현식을 사용해서
-// 요청 주소를 제한할 수 있다
-
-// ex)
-// @GetMapping("{boardCode:[0-9]+}")
-// boardCode 자리에 숫자로만 된 주소만 매핑함
-
+/*
+ * 
+ * @PathVariable("key")
+ * @Request/Get/Post/Put/Delete Mapping에 작성된 URL에서 특정
+ * 경로를 얻어와 // 저장하는 어노테이션
+ * 
+ * ex) 요청 주소 : /test/영주/하와이
+ * 
+ * @GetMapping("test/{apple}/{banana}")
+ * public String test(
+ *  @PathVariable("apple") String a, 
+ *  @PathVariable("banana") String b
+ * )
+ * 
+ * a에 저장된 값 == 영주 // b에 저장된 값 == 하와이
+ * 
+ * [추가 내용] // 요청 주소에 정규 표현식을 사용해서 // 요청 주소를 제한할 수 있다
+ * 
+ * ex) // @GetMapping("{boardCode:[0-9]+}") // boardCode 자리에 숫자로만 된 주소만 매핑함
+ * 
+ * [추가 내용]
+ * @PathVariable로 얻어온 값은 request scope로 자동 전달됨
+ * 
+ */
 
 
 
