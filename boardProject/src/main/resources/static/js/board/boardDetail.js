@@ -75,6 +75,21 @@ deleteBtn.addEventListener("click", () => {
 });
 
 
+/* ------------ 게시글 수정 버튼 ------------- */
+const updateBtn = document.querySelector("#updateBtn");
+
+if(updateBtn != null){
+  updateBtn.addEventListener("click", () => {
+
+    // 현재 : /board/1/4021?cp=1
+    // 수정 : editBoard/1/2010/update?cp=1 (GET 방식)
+    location.href = location.pathname.replace('board', 'editBoard')
+                    + "/update" + location.search;
+
+
+  });
+}
+
 
 
 
