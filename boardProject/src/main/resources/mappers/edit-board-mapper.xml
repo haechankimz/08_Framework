@@ -108,7 +108,7 @@
 	</update>
 	
 	
-	<!-- 게시글 이비지 삽입(1행) -->
+	<!-- 게시글 이미지 삽입(1행) -->
 	<insert id="insertImage">
 		INSERT INTO BOARD_IMG
 		VALUES(NEXT_IMG_NO() , #{imgPath},

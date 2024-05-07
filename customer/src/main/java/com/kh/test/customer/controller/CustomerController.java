@@ -20,11 +20,7 @@ public class CustomerController {
 		
 		int result = service.insertCustomer(customer);
 	
-		String path = null;
-		
-		if(result > 0 ) path = "result";
-		
-		return path;
+		return "result";
 	}
 	
 }

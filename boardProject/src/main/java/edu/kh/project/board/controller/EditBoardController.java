@@ -79,7 +79,7 @@ public class EditBoardController {
 		 *   	오류가 발생할 것임
 		 *   
 		 * [해결방법]
-		 * - 무작적 서버에 저장 X
+		 * - 무작정 서버에 저장 X
 		 *  -> 제출된 파일이 있는지 확인하는 로직을 추가 구성
 		 *  
 		 *  + List 요소의 index 번호 == IMG_ORDER 와 같음
@@ -127,7 +127,7 @@ public class EditBoardController {
 		if(result > 0 ) {
 			path = "/board/" + boardCode;
 		} else {
-			path = "/editBoard/" + boardCode +"/" + boardNo;;
+			path = "/editBoard/" + boardCode +"/" + boardNo;
 		}
 		
 		return "redirect:" + path;
@@ -179,7 +179,6 @@ public class EditBoardController {
 			path = "board/boardUpdate";
 			model.addAttribute("board", board);
 		}
-		
 		
 		return path;
 	}
