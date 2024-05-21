@@ -32,6 +32,8 @@ public class ApiController {
 	}
 	
 	
+	
+	
 	/** Java에서 Open API 요청 후 포워드
 	 * @return
 	 * @throws IOException 
@@ -122,7 +124,7 @@ public class ApiController {
 
         
         conn.setRequestMethod("GET"); // 요청 메서드를 GET 지정
-        conn.setRequestProperty("Content-type", "application/json"); // 
+        conn.setRequestProperty("Content-type", "application/json");
         
         // 응답 상태 코드 (200 : 성공, 404 : 페이지 찾을 수 없음)
         System.out.println("Response code: " + conn.getResponseCode());
@@ -231,6 +233,11 @@ public class ApiController {
         return "ex2";
 	}
 	
+	
+	@GetMapping("ex3")
+	public String ex3() {
+		return "ex3";
+	}
 	
 	
 	
