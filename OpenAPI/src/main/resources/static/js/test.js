@@ -1,4 +1,30 @@
-const serviceKey = "521V7dbXnhbe5acYDYw8t8T3KZe54wD7X2%2BGUtEC%2FaHP2tjSTyzxZvqAPrxe7XmjZ%2F5%2F9lkSzx9dxBZVcaq0bA%3D%3D";
-const returnType = "JSON";
-const numOfRows = 100;
-const pageNo = 1;
+/* 개인 API 인증키 */
+
+const serviceKey = "개인 인증키를 작성하세요(문제 원인 X)";
+
+const getAirPollution = (sidoName) => {
+
+  const requestUrl = 'http://apis.data.go.kr/B552584/ArpltnInforInqireSvc/getMinuDustFrcstDspth';
+
+  // 쿼리 스트링 생성 (URLSearchParams.toString())
+
+  const searchParams = new URLSearchParams();
+
+  searchParams.append('serviceKey', serviceKey);
+
+  searchParams.append('returnType', 'JSON');
+  searchParams.append('sidoName', sidoName);
+
+  fetch(requestUrl + "?" + searchParams.toString())
+
+  .then(resp => resp.json())
+
+  .then(result => {
+
+  console.log(result);
+
+  })
+
+  .catch(e => console.log(e));
+
+}

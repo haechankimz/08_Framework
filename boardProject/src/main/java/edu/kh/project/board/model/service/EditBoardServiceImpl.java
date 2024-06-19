@@ -44,7 +44,7 @@ public class EditBoardServiceImpl implements EditBoardService {
 		//	  Board 테이블에 INSERT 하기
 		//    -> INSERT 결과로 작성된 게시글 번호(생성된 시퀀스 번호) 반환 받기
 		
-		int result = mapper.boardInsert(inputBoard); 
+		int result = mapper.boardInsert(inputBoard);
 
 		// result = INSERT 결과 (0/1 행 삽입)
 		
@@ -168,7 +168,7 @@ public class EditBoardServiceImpl implements EditBoardService {
 			}
 		}
 		
-		// 3. 선택한 파일이 존재하 경우 해당 파일 정보만 모아두는 List를 생성
+		// 3. 선택한 파일이 존재하는 경우 해당 파일 정보만 모아두는 List를 생성
 		List<BoardImg> uploadList = new ArrayList<>();
 		
 		
